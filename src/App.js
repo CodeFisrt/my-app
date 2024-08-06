@@ -1,8 +1,11 @@
 import Admin from "./components/Admin";
 import ConditionRendering from "./components/ConditionRendering";
 import Contact from "./components/Contact";
+import DynamicClass from "./components/DynamicClass";
 import Event from "./components/Event";
+import MapOperator from "./components/MapOperator";
 import Product from "./components/Product";
+import Style from "./components/Style";
 import UseState from "./components/UseState";
 import UseStateArray from "./components/UseStateArray";
 import UseStateObject from "./components/UseStateObject";
@@ -14,7 +17,8 @@ function App() {
   return (
     <div>
       <h1>Parent Page</h1>
-      <ConditionRendering/>
+      
+      <MapOperator/>
     </div>
   );
 }
