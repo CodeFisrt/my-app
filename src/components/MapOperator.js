@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const MapOperator = () => {
     const cityList = ['Pune', 'Mumbai', 'Nagpur','Jaipur'];
@@ -8,6 +8,10 @@ const MapOperator = () => {
         {studId:3,name:'CCC',city:'Nagpur',rollNo:113},
         {studId:4,name:'DDD',city:'Mumbai',rollNo:114}
     ]
+    const [selectedCity,setCity] = useState("");
+    const chnageCity = (cityName) => {
+        setCity(cityName)
+    }
     return (
         <div>
             <div className="row">
@@ -48,9 +52,13 @@ const MapOperator = () => {
                 <div className="col-3">
                     {
                        cityList.map((city)=> {
-                        return (<div>{city}</div>)
+                        return (<button onClick={()=>chnageCity(city)}
+                        className={`btn mx-2 ${selectedCity == city ? 'btn-success': 'btn-primary'}`} 
+                          >{city}</button>)
                        }) 
                     }
+                    <br/>
+                    {selectedCity}
                 </div>
                 <div className="col-3">
                     <table className='table table-bordered'>

@@ -1,3 +1,4 @@
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Admin from "./components/Admin";
 import ConditionRendering from "./components/ConditionRendering";
 import Contact from "./components/Contact";
@@ -12,13 +13,39 @@ import UseStateObject from "./components/UseStateObject";
 import PlanSelection from "./logical/PlanSelection";
 import Train from "./logical/Train";
 import logo from "./logo.svg";
+import GetAPI from "./components/GetAPI";
 
 function App() {
   return (
     <div>
-      <h1>Parent Page</h1>
-      
-      <MapOperator/>
+      <BrowserRouter>
+        <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+          <div className="container-fluid">
+            <ul className="navbar-nav">
+              <li className="nav-item"> 
+                <Link className="nav-link active" to="/map" >Map</Link>
+              </li>
+              <li className="nav-item">
+              <Link className="nav-link active" to="/Event" >Event</Link>
+              </li>
+              <li className="nav-item">
+              <Link className="nav-link active" to="/Condition-rendering" >Hide Show</Link>
+              </li>
+              <li className="nav-item">
+              <Link className="nav-link active" to="/get-api" >get-api</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      <Routes>
+        {/* Default Route */}
+        <Route path="/" element={<Event></Event>}></Route>
+        <Route path="/map" element={<MapOperator></MapOperator>}></Route>
+        <Route path="/Event" element={<Event></Event>}></Route>
+        <Route path="/get-api" element={<GetAPI></GetAPI>}></Route>
+        <Route path="/Condition-rendering" element={<ConditionRendering></ConditionRendering>}></Route>
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }
