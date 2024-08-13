@@ -14,6 +14,7 @@ import PlanSelection from "./logical/PlanSelection";
 import Train from "./logical/Train";
 import logo from "./logo.svg";
 import GetAPI from "./components/GetAPI";
+import User from "./components/User";
 
 function App() {
   return (
@@ -34,6 +35,9 @@ function App() {
               <li className="nav-item">
               <Link className="nav-link active" to="/get-api" >get-api</Link>
               </li>
+              <li className="nav-item">
+              <Link className="nav-link active" to="/User" >User</Link>
+              </li>
             </ul>
           </div>
         </nav>
@@ -41,6 +45,7 @@ function App() {
         {/* Default Route */}
         <Route path="/" element={<Event></Event>}></Route>
         <Route path="/map" element={<MapOperator></MapOperator>}></Route>
+        <Route path="/User" element={<User></User>}></Route>
         <Route path="/Event" element={<Event></Event>}></Route>
         <Route path="/get-api" element={<GetAPI></GetAPI>}></Route>
         <Route path="/Condition-rendering" element={<ConditionRendering></ConditionRendering>}></Route>
