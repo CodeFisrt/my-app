@@ -36,6 +36,35 @@ const User = () => {
             alert(result.data.message)
         }
     }
+
+    const updateUser = async () => { 
+        const result = await axios.post("https://projectapi.gerasim.in/api/BudgetPlanner/UpdateUser",userObj);
+        debugger;
+        if(result.data.result) {
+            alert("User Updated Success");
+            loadData();
+        } else {
+            alert(result.data.message)
+        }
+    }
+    const onDelete = async (id) => {
+        const isDelete =  window.confirm("Are you sure want to delet");
+        debugger;
+        if(isDelete) {
+            const result = await axios.delete("https://projectapi.gerasim.in/api/BudgetPlanner/DeleteUserByUserId?userId="+id);
+            debugger;
+            if(result.data.result) {
+                alert("User Deleted Success");
+                loadData();
+            } else {
+                alert(result.data.message)
+            }
+        }
+        
+    }
+    const onEdit = (data)=> {
+        setUserObj(data);
+    }
     return (
         <div>
             <div className='row'>
@@ -53,6 +82,7 @@ const User = () => {
                                         <th>Email</th>
                                         <th>Full Name</th>
                                         <th>Project Name</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,6 +94,10 @@ const User = () => {
                                                 <td>{user.emailId}</td>
                                                 <td>{user.fullName}</td>
                                                 <td>{user.projectName}</td> 
+                                                <td>
+                                                    <button onClick={()=> onEdit(user)} className='btn btn-primary'>Edit</button>
+                                                    <button onClick={()=> onDelete(user.userId)} className='btn btn-danger'>Delete</button>
+                                                </td> 
                                             </tr>)
                                         })
                                     }
@@ -81,34 +115,38 @@ const User = () => {
                                 <div className='row'>
                                     <div className='col-6'>
                                         <label>User Name</label>
-                                        <input type='text' onChange={(event)=>updateForm(event,'userName')} className='form-control'/>
+                                        <input type='text' value={userObj.userName} onChange={(event)=>updateForm(event,'userName')} className='form-control'/>
                                     </div>
                                     <div className='col-6'>
                                         <label>Email Id</label>
-                                        <input type='text' onChange={(event)=>updateForm(event,'emailId')} className='form-control'/>
+                                        <input type='text' value={userObj.emailId} onChange={(event)=>updateForm(event,'emailId')} className='form-control'/>
                                     </div>
                                     <div className='col-6'>
                                         <label>Full nmame</label>
-                                        <input type='text' onChange={(event)=>updateForm(event,'fullName')} className='form-control'/>
+                                        <input type='text' value={userObj.fullName} onChange={(event)=>updateForm(event,'fullName')} className='form-control'/>
                                     </div>
                                     <div className='col-6'>
                                         <label>Role</label>
-                                        <input type='text' onChange={(event)=>updateForm(event,'role')} className='form-control'/>
+                                        <input type='text' value={userObj.role} onChange={(event)=>updateForm(event,'role')} className='form-control'/>
                                     </div>
                                     <div className='col-6'>
                                         <label>password</label>
-                                        <input type='text' onChange={(event)=>updateForm(event,'password')} className='form-control'/>
+                                        <input type='text' value={userObj.password} onChange={(event)=>updateForm(event,'password')} className='form-control'/>
                                     </div>
                                     <div className='col-6'>
                                         <label>Project Name</label>
-                                        <input type='text' onChange={(event)=>updateForm(event,'projectName')} className='form-control'/>
+                                        <input type='text' value={userObj.projectName} onChange={(event)=>updateForm(event,'projectName')} className='form-control'/>
                                     </div>
                                     
                                     
                                 </div>
                                 <div className='row'>
                                     <div className='col-12'>
-                                        <button className='btn btn-success' onClick={saveUser}>Save User</button>
+                                         <button className='btn btn-success' onClick={saveUser}>Save User</button>
+                                         <button className='btn btn-warning' onClick={updateUser}>Update User</button>
+                                         
+                                        
+                                       
                                     </div>
                                 </div>
 
