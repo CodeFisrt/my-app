@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Alert from '../reusableComponent/Alert';
+import ProgressBar from '../reusableComponent/ProgressBar';
 
 const MapOperator = () => {
     const cityList = ['Pune', 'Mumbai', 'Nagpur','Jaipur'];
@@ -14,6 +16,8 @@ const MapOperator = () => {
     }
     return (
         <div>
+           <Alert message="Hi From Map Opr Page" alertClassName="alert-danger" alertType="Error"/>
+           <ProgressBar progress="90"></ProgressBar>
             <div className="row">
                 <div className="col-3">
                     <ul>

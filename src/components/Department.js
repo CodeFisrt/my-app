@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Alert from '../reusableComponent/Alert';
+import ProgressBar from '../reusableComponent/ProgressBar';
 
 const Department = () => {
     const [parentDeptList,setParent] = useState([])
@@ -33,7 +35,9 @@ const Department = () => {
     }
     return (
         <div>
-            <div className='row'>
+            <Alert message="Welcome to Dept Compoennt" alertClassName="alert-success" alertType="Success" />
+           <ProgressBar progress="40"></ProgressBar>
+           <div className='row'>
                 <div className='col-6'>
                     <div className='row'>
                         <div className='col-4'>

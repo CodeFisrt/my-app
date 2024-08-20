@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Alert from '../reusableComponent/Alert';
 
 const ConditionRendering = () => {
     const [isDiv1Visiable,setDiv1] = useState(true);
@@ -22,6 +23,8 @@ const ConditionRendering = () => {
     }
     return (
         <div>
+           
+            
             <div className="row">
                         <div className="col-4">
                             {
