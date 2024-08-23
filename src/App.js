@@ -18,10 +18,18 @@ import User from "./components/User";
 import Department from "./components/Department";
 import ChildDepartment from "./components/ChildDepartment";
 import UseEffect from "./components/UseEffect";
+import { createContext } from "react";
+
+const context = createContext();
 
 function App() {
+  const data = {
+    appName: "My-app-b-23",
+    loggedUser: "Chetan156"
+  }
   return (
     <div>
+    <context.Provider value={data}>
       <BrowserRouter>
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
           <div className="container-fluid">
@@ -66,8 +74,11 @@ function App() {
         <Route path="/Condition-rendering" element={<ConditionRendering></ConditionRendering>}></Route>
       </Routes>
       </BrowserRouter>
+    </context.Provider>
+   
     </div>
   );
 }
 
 export default App;
+export {context}

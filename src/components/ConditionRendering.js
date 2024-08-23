@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Alert from '../reusableComponent/Alert';
+import { context } from '../App';
 
 const ConditionRendering = () => {
+
+    const contextData =  useContext(context);
+
     const [isDiv1Visiable,setDiv1] = useState(true);
     const [isDiv2Visiable, setdiv2] = useState(false);
 
@@ -23,7 +27,7 @@ const ConditionRendering = () => {
     }
     return (
         <div>
-           
+           <p>{JSON.stringify(contextData)}</p>
             
             <div className="row">
                         <div className="col-4">

@@ -2,11 +2,12 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Alert from '../reusableComponent/Alert';
 import ProgressBar from '../reusableComponent/ProgressBar';
+import { getParentDepartments } from '../service/EmployeService';
 
 const Department = () => {
     const [parentDeptList,setParent] = useState([])
     const [parentObj, setParentObj] = useState({
-        "departmentId": 0,
+        "departmentId": "asd",
         "departmentName": "",
         "departmentLogo": ""
     });
@@ -16,8 +17,12 @@ const Department = () => {
     },[]);
 
     const getParentDept = async () => {
-        const res = await axios.get("https://projectapi.gerasim.in/api/Complaint/GetParentDepartment");
-        setParent(res.data.data)
+        debugger;
+        getParentDepartments().then(res=>{
+            debugger;
+            setParent(res)
+        })
+        
     }
 
     const updateForm = (event, key) => {
@@ -25,14 +30,23 @@ const Department = () => {
     }
    
     const addDept = async () => {
-        const res = await axios.post("https://projectapi.gerasim.in/api/Complaint/AddNewDepartment", parentObj);
+      try {
+        const res = await axios.post( "https://projectapi.gerasim.in/api/Complaint/AddNewDepartment",parentObj );
         if (res.data.result) {
-            alert("Dept Created Succees")
-            getParentDept();
+          alert("Dept Created Succees");
+          getParentDept();
         } else {
-            alert(res.data.message)
+          alert(res.data.message);
         }
-    }
+      } catch (error) {
+        debugger;
+        if(error.response.status == 400) {
+            alert("Please check Form Value "+ JSON.stringify(error.response.data))
+        } else if (error.response.status ==500) {
+            alert("API Error")
+        }
+      }
+    };
     return (
         <div>
             <Alert message="Welcome to Dept Compoennt" alertClassName="alert-success" alertType="Success" />

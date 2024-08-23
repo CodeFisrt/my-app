@@ -1,5 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import axios from 'axios';
+import { getParentDepartments } from '../service/EmployeService';
 const ChildDepartment = () => {
     const [childDeptList,setChuildList ] = useState([])
     const [parentDeptList,setparentList ] = useState([])
@@ -19,8 +20,10 @@ const ChildDepartment = () => {
         setChuildList(res.data.data)
     }
     const getAllParentDepartment = async () => {
-        const res = await axios.get("https://projectapi.gerasim.in/api/Complaint/GetParentDepartment");
-        setparentList(res.data.data)
+       getParentDepartments().then(res=> {
+        setparentList(res)
+       })
+        
     }
 
     const updateForm = (event, key) => {

@@ -1,7 +1,10 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { context } from '../App';
 
 const UseEffect = () => {
+
+    const myContexrData =  useContext(context);
     const [courseName,setCourseName]= useState("");
     const [courDuration,setcourDuration]= useState("");
     const [users,setusers]= useState("");
@@ -41,7 +44,7 @@ const UseEffect = () => {
 
     return (
         <div>
-            {courseName}
+            {courseName} - {myContexrData.appName}
             <input type='text' onChange={(event)=>onCourseChange(event)} />
             <br/>
             <input type='text' onChange={(event)=>onCourseDurationChange(event)} />
