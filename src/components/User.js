@@ -16,6 +16,7 @@ const User = () => {
         "refreshToken": "",
         "refreshTokenExpiryTime":new Date()
     })
+    const [errors,setErrors]= useState({});
 
     const updateForm = (event, key) => {
         setUserObj(oldData=>({...oldData,[key]:event.target.value}))
@@ -25,16 +26,33 @@ const User = () => {
         const result =  await axios.get("https://projectapi.gerasim.in/api/BudgetPlanner/GetAllUsers");
         setUser(result.data.data)
     }
+
+    const validateForm = () => {
+        let formErrors = {};
+        if (userObj.userName == '') {
+            formErrors.userName = 'Username is required';
+        } 
+        if (!userObj.password) formErrors.password = 'Password is required';
+        return formErrors;
+      };
+
     const saveUser =  async () => {
-        debugger;
-        const result = await axios.post("https://projectapi.gerasim.in/api/BudgetPlanner/AddNewuser",userObj);
-        debugger;
-        if(result.data.result) {
-            alert("User Created Success");
-            loadData();
+        const errors =  validateForm();
+        if(Object.keys(errors).length == 0) {
+            setErrors({})
+            const result = await axios.post("https://projectapi.gerasim.in/api/BudgetPlanner/AddNewuser",userObj);
+            debugger;
+            if(result.data.result) {
+                alert("User Created Success");
+                loadData();
+            } else {
+                alert(result.data.message)
+            }
         } else {
-            alert(result.data.message)
+            setErrors(errors)
         }
+        debugger;
+        
     }
 
     const updateUser = async () => { 
@@ -109,13 +127,28 @@ const User = () => {
                 <div className='col-4'>
                     <div className='card'>
                         <div className='card-header bg-success'>
-                            New User - {JSON.stringify(userObj)}
+                            New User  
                         </div>
                         <div className='card-body'>
                                 <div className='row'>
                                     <div className='col-6'>
                                         <label>User Name</label>
                                         <input type='text' value={userObj.userName} onChange={(event)=>updateForm(event,'userName')} className='form-control'/>
+                                        <div className='text-danger'>
+                                        {
+                                         errors.userName  &&  errors.userName 
+                                       }
+                                        </div>
+                                      
+                                       
+                                        {/* <div className='text-danger'>
+                                            {
+                                                userObj.userName == '' && <span>This Is Required</span>
+                                            }
+                                             {
+                                                userObj.userName !== '' && userObj.userName.length <= 5  && <span>Min 5 Char Required</span>
+                                            } 
+                                        </div>  */}
                                     </div>
                                     <div className='col-6'>
                                         <label>Email Id</label>
@@ -132,6 +165,17 @@ const User = () => {
                                     <div className='col-6'>
                                         <label>password</label>
                                         <input type='text' value={userObj.password} onChange={(event)=>updateForm(event,'password')} className='form-control'/>
+                                        <div className='text-danger'>
+                                        {
+                                         errors.password  &&  errors.password 
+                                       }
+                                        </div>
+                                        {/* <div className='text-danger'>
+                                        {
+                                            userObj.password == '' && <span>This Is Required</span>
+                                        }
+                                        </div> */}
+                                        
                                     </div>
                                     <div className='col-6'>
                                         <label>Project Name</label>
@@ -141,8 +185,16 @@ const User = () => {
                                     
                                 </div>
                                 <div className='row'>
-                                    <div className='col-12'>
-                                         <button className='btn btn-success' onClick={saveUser}>Save User</button>
+                                    <div className='col-12 text-center'>
+                                      <button   className='btn btn-success mx-2' onClick={saveUser}>Save User</button>
+                                        {/* {
+                                           !( userObj.userName !== '' && userObj.userName.length >= 5 && userObj.password !== '')   &&  <button disabled className='btn btn-success mx-2' onClick={saveUser}>Save User</button>
+                                        }
+                                        {
+                                            userObj.userName !== '' && userObj.userName.length >= 5 && userObj.password !== '' &&  <button  className='btn btn-success mx-2' onClick={saveUser}>Save User</button>
+                                        } */}
+                                         
+
                                          <button className='btn btn-warning' onClick={updateUser}>Update User</button>
                                          
                                         
