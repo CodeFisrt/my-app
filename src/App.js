@@ -18,19 +18,21 @@ import User from "./components/User";
 import Department from "./components/Department";
 import ChildDepartment from "./components/ChildDepartment";
 import UseEffect from "./components/UseEffect";
-import { createContext } from "react";
+import { createContext } from "react"; 
+import AddUser from "./components/AddUser";
 
-const context = createContext();
+const myAppContextData = createContext();
 
 function App() {
-  const data = {
-    appName: "My-app-b-23",
-    loggedUser: "Chetan156"
+  const myData = {
+    appName: 'ReactJs Practice',
+    loggedUsername: 'chetan',
+    roleList: ['user','guest','admin']
   }
   return (
     <div>
-    <context.Provider value={data}>
-      <BrowserRouter>
+       <myAppContextData.Provider value={myData}>
+        <BrowserRouter>
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
           <div className="container-fluid">
             <ul className="navbar-nav">
@@ -65,20 +67,22 @@ function App() {
         {/* Default Route */}
         <Route path="/" element={<Event></Event>}></Route>
         <Route path="/map" element={<MapOperator></MapOperator>}></Route>
+        <Route path="/adduser/:userid" element={<AddUser></AddUser>}></Route>
         <Route path="/User" element={<User></User>}></Route>
         <Route path="/Department" element={<Department></Department>}></Route>
         <Route path="/ChildDepartment" element={<ChildDepartment></ChildDepartment>}></Route>
-        <Route path="/Event" element={<Event></Event>}></Route>
+        <Route path="/Event" element={<Event value=""></Event>}></Route>
         <Route path="/Use-Effect" element={<UseEffect></UseEffect>}></Route>
         <Route path="/get-api" element={<GetAPI></GetAPI>}></Route>
         <Route path="/Condition-rendering" element={<ConditionRendering></ConditionRendering>}></Route>
       </Routes>
-      </BrowserRouter>
-    </context.Provider>
-   
+        </BrowserRouter> 
+       </myAppContextData.Provider>
+      
     </div>
   );
 }
 
 export default App;
-export {context}
+export {myAppContextData}
+ 

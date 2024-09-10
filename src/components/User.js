@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const User = () => {
 
+    const history = useNavigate();
     const [userList,setUser]= useState([]);
     const [userObj,setUserObj] = useState({
         "userId": 0,
@@ -81,12 +83,14 @@ const User = () => {
         
     }
     const onEdit = (data)=> {
+        debugger;
+        history('/adduser/'+data.userId)
         setUserObj(data);
     }
     return (
         <div>
             <div className='row'>
-                <div className='col-8'>
+                <div className='col-12'>
                     <div className='card'>
                         <div className='card-header bg-success'>
                             User List <button onClick={loadData}>Load Data</button>
@@ -124,87 +128,7 @@ const User = () => {
                         </div>
                     </div>
                 </div>
-                <div className='col-4'>
-                    <div className='card'>
-                        <div className='card-header bg-success'>
-                            New User  
-                        </div>
-                        <div className='card-body'>
-                                <div className='row'>
-                                    <div className='col-6'>
-                                        <label>User Name</label>
-                                        <input type='text' value={userObj.userName} onChange={(event)=>updateForm(event,'userName')} className='form-control'/>
-                                        <div className='text-danger'>
-                                        {
-                                         errors.userName  &&  errors.userName 
-                                       }
-                                        </div>
-                                      
-                                       
-                                        {/* <div className='text-danger'>
-                                            {
-                                                userObj.userName == '' && <span>This Is Required</span>
-                                            }
-                                             {
-                                                userObj.userName !== '' && userObj.userName.length <= 5  && <span>Min 5 Char Required</span>
-                                            } 
-                                        </div>  */}
-                                    </div>
-                                    <div className='col-6'>
-                                        <label>Email Id</label>
-                                        <input type='text' value={userObj.emailId} onChange={(event)=>updateForm(event,'emailId')} className='form-control'/>
-                                    </div>
-                                    <div className='col-6'>
-                                        <label>Full nmame</label>
-                                        <input type='text' value={userObj.fullName} onChange={(event)=>updateForm(event,'fullName')} className='form-control'/>
-                                    </div>
-                                    <div className='col-6'>
-                                        <label>Role</label>
-                                        <input type='text' value={userObj.role} onChange={(event)=>updateForm(event,'role')} className='form-control'/>
-                                    </div>
-                                    <div className='col-6'>
-                                        <label>password</label>
-                                        <input type='text' value={userObj.password} onChange={(event)=>updateForm(event,'password')} className='form-control'/>
-                                        <div className='text-danger'>
-                                        {
-                                         errors.password  &&  errors.password 
-                                       }
-                                        </div>
-                                        {/* <div className='text-danger'>
-                                        {
-                                            userObj.password == '' && <span>This Is Required</span>
-                                        }
-                                        </div> */}
-                                        
-                                    </div>
-                                    <div className='col-6'>
-                                        <label>Project Name</label>
-                                        <input type='text' value={userObj.projectName} onChange={(event)=>updateForm(event,'projectName')} className='form-control'/>
-                                    </div>
-                                    
-                                    
-                                </div>
-                                <div className='row'>
-                                    <div className='col-12 text-center'>
-                                      <button   className='btn btn-success mx-2' onClick={saveUser}>Save User</button>
-                                        {/* {
-                                           !( userObj.userName !== '' && userObj.userName.length >= 5 && userObj.password !== '')   &&  <button disabled className='btn btn-success mx-2' onClick={saveUser}>Save User</button>
-                                        }
-                                        {
-                                            userObj.userName !== '' && userObj.userName.length >= 5 && userObj.password !== '' &&  <button  className='btn btn-success mx-2' onClick={saveUser}>Save User</button>
-                                        } */}
-                                         
-
-                                         <button className='btn btn-warning' onClick={updateUser}>Update User</button>
-                                         
-                                        
-                                       
-                                    </div>
-                                </div>
-
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     );

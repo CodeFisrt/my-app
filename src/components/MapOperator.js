@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import Alert from '../reusableComponent/Alert';
 import ProgressBar from '../reusableComponent/ProgressBar';
+import { useNavigate } from 'react-router-dom';
 
 const MapOperator = () => {
+
+    const history =  useNavigate();
+
     const cityList = ['Pune', 'Mumbai', 'Nagpur','Jaipur'];
     const studentList = [
         {studId:1,name:'AAA',city:'Pune',rollNo:111},
@@ -14,8 +18,12 @@ const MapOperator = () => {
     const chnageCity = (cityName) => {
         setCity(cityName)
     }
+    const navigateToHideShow = () => {
+        history('/Condition-rendering')
+    }
     return (
         <div>
+            <button className='btn btn-primary' onClick={navigateToHideShow} >Navigate </button>
            <Alert message="Hi From Map Opr Page" alertClassName="alert-danger" alertType="Error"/>
            <ProgressBar progress="90"></ProgressBar>
             <div className="row">

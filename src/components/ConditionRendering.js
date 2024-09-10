@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import Alert from '../reusableComponent/Alert';
-import { context } from '../App';
+import Alert from '../reusableComponent/Alert'; 
+import Loader from './Loader';
+import { myAppContextData } from '../App';
 
 const ConditionRendering = () => {
-
-    const contextData =  useContext(context);
+ 
 
     const [isDiv1Visiable,setDiv1] = useState(true);
     const [isDiv2Visiable, setdiv2] = useState(false);
@@ -25,10 +25,11 @@ const ConditionRendering = () => {
     const chnageDiv2 = () => {
         setdiv2(!isDiv2Visiable)
     }
+    const contextData =  useContext(myAppContextData)
     return (
-        <div>
-           <p>{JSON.stringify(contextData)}</p>
-            
+        <div> 
+           Logged User Name:  {contextData.loggedUsername}
+            <Loader loaderClass="text-danger"/>
             <div className="row">
                         <div className="col-4">
                             {
